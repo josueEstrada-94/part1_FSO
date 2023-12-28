@@ -8,6 +8,20 @@ const Header = (props) => {
   )
 }
 
+const Statistics = (props) => {
+  return (
+    <>
+      <h1>Statistics</h1>
+      <div>Good: {props.good}</div>
+      <div>Neutral: {props.neutral}</div>
+      <div>Bad: {props.bad}</div>
+      <div>All: {props.all}</div>
+      <div>Average: {props.average}</div>
+      <div>Positive: {(props.good/props.all * 100).toFixed(2)}%</div>
+    </>
+  )
+}
+
 
 function App() {
   const [good, setGood] = useState(0)
@@ -17,6 +31,7 @@ function App() {
   console.log('rendering counter value', good, neutral, bad)
 
   const header = 'Give Feeback'
+  const statistics = 'Statistics'
   const all = good + neutral + bad
   const weightedSum = good * 1 + neutral * 0 + bad * -1
   const average = all > 0 ? weightedSum / all : 0 
@@ -44,13 +59,13 @@ function App() {
       <button onClick={neutralOption}>neutral</button>
       <button onClick={badOption}>bad</button>
      
-      <h1>Statistics</h1>
-      <div>Good: {good}</div>
-      <div>Neutral: {neutral}</div>
-      <div>Bad: {bad}</div>
-      <div>All: {all}</div>
-      <div>Average: {average}</div>
-      <div>Positive: {(good/all * 100).toFixed(2)}%</div>
+      <Statistics 
+        statistics = {statistics}
+        good = {good}
+        neutral = {neutral}
+        bad = {bad}
+        all = {all}
+        average = {average}/>
     </div>
   )
 
