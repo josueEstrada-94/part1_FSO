@@ -11,7 +11,7 @@ const Header = (props) => {
 const Statistics = (props) => {
   return (
     <>
-      <h1>Statistics</h1>
+      
       <div>Good: {props.good}</div>
       <div>Neutral: {props.neutral}</div>
       <div>Bad: {props.bad}</div>
@@ -58,14 +58,17 @@ function App() {
       <button onClick={goodOption}>good</button>
       <button onClick={neutralOption}>neutral</button>
       <button onClick={badOption}>bad</button>
-     
-      <Statistics 
-        statistics = {statistics}
+      <h1>{statistics}</h1>
+      
+     {all === 0 ? 
+     (<p>No Feedback Given</p>
+     ) : (
+     <Statistics        
         good = {good}
         neutral = {neutral}
         bad = {bad}
         all = {all}
-        average = {average}/>
+        average = {average}/>)}
     </div>
   )
 
