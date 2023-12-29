@@ -8,33 +8,33 @@ const Header = (props) => {
   )
 }
 
-const Statistics = (props) => {
+const Button = ({onClick, text}) => {
   return (
     <>
-      
-      <div>Good: {props.good}</div>
-      <div>Neutral: {props.neutral}</div>
-      <div>Bad: {props.bad}</div>
-      <div>All: {props.all}</div>
-      <div>Average: {props.average}</div>
-      <div>Positive: {(props.good/props.all * 100).toFixed(2)}%</div>
+      <button onClick={onClick}>{text}</button>    
     </>
   )
 }
 
+const StatisticLine = (props) => {
+  return (
+    <div>
+    {props.text}: {props.value}
+    </div>
+  )
+}
 
 function App() {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  console.log('rendering counter value', good, neutral, bad)
-
   const header = 'Give Feeback'
   const statistics = 'Statistics'
   const all = good + neutral + bad
   const weightedSum = good * 1 + neutral * 0 + bad * -1
   const average = all > 0 ? weightedSum / all : 0 
+  const positive = (good/all * 100).toFixed(2)+"%"
 
   const goodOption = () => {
     console.log('good')
@@ -55,20 +55,23 @@ function App() {
     <div>
       <Header header = {header} />
       
-      <button onClick={goodOption}>good</button>
-      <button onClick={neutralOption}>neutral</button>
-      <button onClick={badOption}>bad</button>
+      <Button onClick = {goodOption} text ='Good' />
+      <Button onClick = {neutralOption} text ='Neutral' />
+      <Button onClick = {badOption} text ='Bad' />
+
       <h1>{statistics}</h1>
       
-     {all === 0 ? 
-     (<p>No Feedback Given</p>
-     ) : (
-     <Statistics        
-        good = {good}
-        neutral = {neutral}
-        bad = {bad}
-        all = {all}
-        average = {average}/>)}
+     {all === 0 && <p>No Feedback Given</p>}
+     {all !== 0 && (
+     <>
+     <StatisticLine text = 'Good' value= {good} />        
+     <StatisticLine text = 'Neutral' value= {neutral} />
+     <StatisticLine text = 'Bad' value= {bad} /> 
+     <StatisticLine text = 'All' value= {all} />
+     <StatisticLine text = 'Average' value= {average} />
+     <StatisticLine text = 'Positive' value= {positive} />
+     </> 
+        )}
     </div>
   )
 
