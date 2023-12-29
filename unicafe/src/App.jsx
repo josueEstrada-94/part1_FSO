@@ -18,9 +18,10 @@ const Button = ({onClick, text}) => {
 
 const StatisticLine = (props) => {
   return (
-    <div>
-    {props.text}: {props.value}
-    </div>
+    <tr>
+      <td>{props.text}:</td> 
+      <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -63,14 +64,15 @@ function App() {
       
      {all === 0 && <p>No Feedback Given</p>}
      {all !== 0 && (
-     <>
+     <table>
      <StatisticLine text = 'Good' value= {good} />        
      <StatisticLine text = 'Neutral' value= {neutral} />
      <StatisticLine text = 'Bad' value= {bad} /> 
      <StatisticLine text = 'All' value= {all} />
      <StatisticLine text = 'Average' value= {average} />
      <StatisticLine text = 'Positive' value= {positive} />
-     </> 
+     </table>
+     
         )}
     </div>
   )
