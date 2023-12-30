@@ -19,11 +19,16 @@ function App() {
     "Design and programming are human activities; forget that and all is lost.",
     "Real programmers can write assembly code in any language."
   ]
-  
+
+  /*Array with Zeros*/
+  const arrayLength = anecdotes.length
+
+
+  const [votes, setVotes] = useState(new Array(arrayLength).fill(0))
   const [selected, setSelected] = useState(0)
 
   const getRandomIndex = () => {
-    const randomIndex = Math.floor(Math.random() * 15);
+    const randomIndex = Math.floor(Math.random() * anecdotes.length);
     return randomIndex;
   }
 
@@ -32,9 +37,17 @@ function App() {
     setSelected(randomIndex)
   }
 
+  const handleVoteClick = () => {
+    const newVotes = [...votes]
+    newVotes[selected] += 1
+    setVotes(newVotes)
+  }
+
   return (
     <>
       <p>{anecdotes[selected]}</p>
+      <p>Votes: {votes[selected]}</p>
+      <button onClick={handleVoteClick}>Vote</button>
       <button onClick={handleButtonClick}>Next Quote</button>
     </>
   )
